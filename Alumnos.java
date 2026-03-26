@@ -17,15 +17,7 @@ public class Alumnos {
     private int edad;
     
     
-    
-    //Constructor
-    public Alumnos(int matricula, String nombre,String carrera,int edad){
-        this.matricula = matricula;
-        this.nombre = nombre;
-        this.carrera = carrera;
-        this.edad = edad;       
-    }
-    
+    //Constructor vacio
     public Alumnos(){}
     
     //Metodos set y get
@@ -40,7 +32,7 @@ public class Alumnos {
     }
     
     public String getNombre(){
-        return this.nombre = nombre;
+        return this.nombre;
     }
     
     public void setNombre(String nombre){
@@ -164,15 +156,21 @@ public class Alumnos {
                                case 2:
                                    System.out.print("Ingrese la maricula del alumno a mostrar:");
                                    int matricula = Integer.parseInt(scanner.nextLine());
+                                   boolean encontrado = false;
                                    for(var i = 0 ; i < alumnos.length ; i++){
                                        if(alumnos[i] != null && alumnos[i].matricula == matricula){
                                           alumnos[i].mostrarInformacion();
+                                          encontrado = true;
                                           break;
                                        }
-                                       else{
-                                           System.out.println("Matricula no encotrada!!!\n");
-                                       }
+                                       
                                    }
+                                   
+                                   if(!encontrado){
+                                       System.out.println("Matricula no encontrada");
+                                   }
+                                   
+                                   
                                 break;
                                 
                                 default:
@@ -189,9 +187,9 @@ public class Alumnos {
                         System.out.println("*** Modificador de Alumno ***");
                         System.out.print("Ingrese la matricula del alumno a modificar:");
                         int matriculaCambio = Integer.parseInt(scanner.nextLine().trim());
-                        
+                        boolean encontrado = false;
                         for(var i = 0 ; i < alumnos.length ; i++){
-                            if(alumnos[i] != null && alumnos[i].matricula == matriculaCambio){
+                            if(alumnos[i] != null && alumnos[i].getMatricula()== matriculaCambio){
                                 System.out.println("Informacion del alumno a modificar");
                                 alumnos[i].mostrarInformacion();
                                 System.out.print("Nuevo nombre:");
@@ -200,14 +198,16 @@ public class Alumnos {
                                 alumnos[i].setCarrera(scanner.nextLine().trim());
                                 System.out.print("Edad:");
                                 alumnos[i].setEdad(Integer.parseInt(scanner.nextLine()));
+                                encontrado = true;
                                 break;
                                 
                             }
-                            else{
-                                System.out.println("Matricula no encontrada\n");
-                                break;  // romper ciclo si no hay ningun alumno
-
-                            }
+                            
+                        }
+                        
+                        if(!encontrado){
+                            System.out.println("Matricula no encontrada\n");
+                                
                         }
                     
                 break;   
@@ -220,16 +220,18 @@ public class Alumnos {
                         int matriculaEliminar = Integer.parseInt(scanner.nextLine());
                         boolean eliminado = false;
                         for(var i = 0 ; i < alumnos.length ; i++){
-                            if(alumnos[i] != null && alumnos[i].matricula == matriculaEliminar){
+                            if(alumnos[i] != null && alumnos[i].getMatricula() == matriculaEliminar){
                                 System.out.println("Alumno Eliminado");
                                 alumnos[i] = null;
                                 eliminado = true;
                                 break;
-                            }
-                          if(!eliminado){
+                            }  
+                        }
+                        
+                        //Si despues de buscar en los 150 alumnos y no lo encontro
+                        if(!eliminado){
                               System.out.println("Matricula no encontrada");
                           }  
-                        }
                 break;
                 
                 
@@ -247,33 +249,7 @@ public class Alumnos {
             
             }
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+                    
         
         
         }
